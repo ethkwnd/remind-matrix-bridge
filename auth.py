@@ -15,7 +15,8 @@ ROOM = os.environ['ROOM']
 
 URL = 'https://www.remind.com/v2/access_tokens/confirmed_login'
 
-def main():
+
+async def auth():
     # This is the form data that the page sends when logging in
     login_data = {
         "user": {
@@ -63,8 +64,4 @@ def main():
             senderUID = thingie['last_message']['sender']['uuid']
             senderDisplayName = thingie['last_message']['sender']['name']
             print(message)
-            bot_fwd.remind_message(ROOM, senderUID, senderDisplayName, message)
-
-
-if __name__ == '__main__':
-    main()
+            await bot_fwd.remind_message(ROOM, senderUID, senderDisplayName, message)
