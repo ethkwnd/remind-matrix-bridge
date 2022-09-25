@@ -27,9 +27,16 @@ async def bridge(room, message):
     match = botlib.MessageMatch(room, message, bot, PREFIX)
 
     if match.is_not_from_this_bot() and match.prefix() and match.command("bridge"):
-
+        print(room.room_id)
         await bot.api.send_text_message(
             room.room_id, " ".join(arg for arg in match.args())
             )
+
+
+@bot.listener.on_custom_event
+async def remind_message(senderUUID, sender, message):
+     await bot.api.send_text_message(
+        '', f'{sender} ({senderUUID}: {message}'
+    )
 
 bot.run()
