@@ -3,12 +3,15 @@ from requests_html import HTMLSession
 import os
 from dotenv import load_dotenv
 import json
+
 import bot_fwd
 
 load_dotenv()
 
 EMAIL = os.environ['EMAIL']
 PASSWORD = os.environ['PASSWORD']
+COOKIE = os.environ['COOKIE']
+ROOM = os.environ['ROOM']
 
 URL = 'https://www.remind.com/v2/access_tokens/confirmed_login'
 
@@ -38,6 +41,7 @@ def main():
             'Remind101-Timezone-Id': 'America/Los_Angeles',
             'Remind101-Timezone-Offset': '-25200',
             'Origin': 'https://www.remind.com',
+            'Cookie': COOKIE,
             }
         r = session.post(URL, data=json.dumps(login_data), headers=headers)
         print(r.text)
@@ -59,7 +63,7 @@ def main():
             senderUID = thingie['last_message']['sender']['uuid']
             senderDisplayName = thingie['last_message']['sender']['name']
             print(message)
-            bot_fwd.remind_message(senderUID, senderDisplayName, message)
+            bot_fwd.remind_message(ROOM, senderUID, senderDisplayName, message)
 
 
 if __name__ == '__main__':

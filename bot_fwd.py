@@ -34,9 +34,9 @@ async def bridge(room, message):
 
 
 @bot.listener.on_custom_event
-async def remind_message(senderUUID, sender, message):
+async def remind_message(room, senderUUID, sender, message):
      await bot.api.send_text_message(
-        '', f'{sender} ({senderUUID}: {message}'
+        room, f'{sender} ({senderUUID}): {message}'
     )
 
 bot.run()
