@@ -33,4 +33,3 @@ enterCode.send_keys(authCode)
 enterCode.submit()
 
 print("logged in successfully")
-
