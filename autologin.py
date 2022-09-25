@@ -27,5 +27,9 @@ enterPass.submit()
 
 driver.implicitly_wait(20) # gives an implicit wait for 20 seconds
 
+enterCode = driver.find_element(By.ID, "id-11")
+authCode = input("Enter confirmation code: ")
+enterCode.send_keys(authCode)
+enterCode.submit()
 
 print("logged in successfully")
